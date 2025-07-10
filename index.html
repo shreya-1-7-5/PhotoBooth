@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Photobooth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>PhotoBooth</h1>
+    <div class="cameracontainer">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="controls">
+        <select  id="filters">
+            <option value="none">NONE</option>
+            <option value="grayscale(100%)">GREYSCALE</option>
+            <option value="sepia(100%)">SEPIA</option>
+            <option value="invert(100%)">INVERT</option>
+            <option value="brightness(150%)">BRIGHTNESS</option>
+            <option value="contrast(200%)">CONTRAST</option>
+        </select>
+        <button id="snap">CAPTURE</button>
+        <a id="download" href="#" download="photo.png">DOWNLOAD</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
