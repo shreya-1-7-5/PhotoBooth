@@ -1,32 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>Photobooth</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<title>Vintage Photobooth</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<!-- TensorFlow.js + HandPose -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.1.0"></script>
 </head>
+
 <body>
-    <h1>PhotoBooth</h1>
-    <div class="cameracontainer">
-        <video id="video" autoplay playsinline></video>
-        <canvas id="canvas"></canvas>
+
+<div class="app">
+  <!-- LEFT PANEL -->
+  <div class="side-panel">
+    <h4>Gallery</h4>
+    <div id="gallery" class="gallery-list">
+      <p class="gallery-empty">No photos yet</p>
     </div>
-    <div class="controls">
-        <select  id="filters">
-            <option value="none">NONE</option>
-            <option value="grayscale(100%)">GREYSCALE</option>
-            <option value="sepia(100%)">SEPIA</option>
-            <option value="invert(100%)">INVERT</option>
-            <option value="brightness(150%)">BRIGHTNESS</option>
-            <option value="contrast(200%)">CONTRAST</option>
-        </select>
-        <button id="snap">CAPTURE</button>
-        <a id="download" href="#" download="photo.png">DOWNLOAD</a>
+  </div>
+
+  <!-- CENTER CAMERA -->
+  <div class="center-panel">
+    <div class="viewer">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="canvas"></canvas>
+      <div id="countdown"></div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="controls">
+      <button id="snap">Take Photo</button>
+      <button id="retake">Retake</button>
+      <a id="download" hidden>Download</a>
+    </div>
+
+    <div class="crop-controls">
+      <button id="applyCrop">Apply Crop</button>
+      <a id="downloadCropped" hidden>Download Cropped</a>
+    </div>
+
+    <div id="status">Show ✌️ to snap</div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="side-panel">
+    <button id="seeAllBtn" class="see-all">VIEW GALLERY</button>
+
+    <div style="margin-top:16px">
+      <label for="timerSelect" style="font-size:12px;color:#5a3825;margin-bottom:6px;display:block;font-weight:700;letter-spacing:1px;">
+        TIMER
+      </label>
+      <select id="timerSelect">
+        <option value="0">No Timer</option>
+        <option value="2">2 sec</option>
+        <option value="5">5 sec</option>
+        <option value="10">10 sec</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+

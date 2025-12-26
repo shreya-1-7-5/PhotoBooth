@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>All Photos - Vintage Photobooth</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div style="max-width:1200px;margin:auto;position:relative;z-index:2;padding-top:40px;">
+  <h2>📸 PHOTO GALLERY</h2>
+
+  <div class="gallery-page" id="allGallery"></div>
+
+  <button onclick="goBack()" class="see-all">⬅ BACK TO CAMERA</button>
+</div>
+
+<script>
+const allGallery = document.getElementById("allGallery");
+let images = JSON.parse(localStorage.getItem("galleryImages")) || [];
+
+function renderAll(){
+  allGallery.innerHTML = "";
+
+  if(images.length === 0){
+    allGallery.innerHTML = "<p style='text-align:center;color:#8b6f47;font-size:18px;'>No photos yet</p>";
+    return;
+  }
+
+  images.forEach((url, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "gallery-item";
+
+    const img = document.createElement("img");
+    img.src = url;
+    img.className = "gallery-thumb";
+
+    const del = document.createElement("button");
+    del.className = "gallery-delete";
+    del.textContent = "×";
+
+    del.onclick = () => {
+      images.splice(index, 1);
+      localStorage.setItem("galleryImages", JSON.stringify(images));
+      renderAll();
+    };
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(del);
+    allGallery.appendChild(wrapper);
+  });
+}
+
+renderAll();
+
+function goBack(){
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
